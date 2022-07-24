@@ -1,31 +1,25 @@
 import sys
 import mutagen
 
-tagList = ["artist", "title", "album", "date", "tracknumber", 
-            "genre", "discnumber", "disctotal", "tracktotal"]
+#Thanks to https://pastebin.com/Ysb25hQh
+tagList = ["ARTIST", "TITLE", "ALBUM", "DATE", "TRACKNUMBER", 
+            "GENRE", "DISCNUMBER", "DISCTOTAL", "TRACKTOTAL"]
 argv = sys.argv[1:]
 
-def getMeta(fileName):
+def setMeta(fileName):
     meta = mutagen.File(fileName)
     fileTags = meta.tags
-    isDel = True
-    i = 0
+    trackTags = dict()
     #for field in fileTags:
-    while i < len (fileTags.keys()):
-        currentTag = fileTags.keys()[i]
-        print(currentTag, i)
-        i = i + 1
-        for verifyTag in tagList:
-            if verifyTag == currentTag:
-                isDel = False
-                break
-            else:
-                isDel = True
-        if isDel:
-            print ("Will be deleted:", currentTag) 
-            meta.pop(currentTag)
-            meta.save()
+    for key, value in fileTags:
+        if key in tagList:
+            trackTags[key] = value    
+
+    meta.delete()
+    meta.update(trackTags)
+    meta.save() 
+    print ("[",fileName,"]", "was processed")
 
 for fileName in argv: 
-    getMeta(fileName)
+    setMeta(fileName)
 
