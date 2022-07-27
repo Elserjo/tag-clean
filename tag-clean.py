@@ -11,6 +11,11 @@ def removeMeta(fileName):
     meta = mutagen.File(fileName)
     fileTags = meta.tags
     toClean = False #Do we need to clean?
+    fileBaseName = os.path.basename(fileName)
+
+    print ("processing file:",
+    num,
+    "[", fileBaseName,"]") 
 
     for key in fileTags.keys():
         if key.upper() not in tagList:
@@ -29,8 +34,7 @@ def removeMeta(fileName):
     meta.delete()
     meta.update(trackTags)
     meta.save() 
-    print ("[",os.path.basename(fileName),"]", "was processed")
 
-for fileName in argv: 
+for num, fileName in enumerate (argv, start=1):   
     removeMeta(fileName)
 
