@@ -16,7 +16,11 @@ def removeMeta(fileName):
     print ("processing file:",
     num,
     "[", fileBaseName,"]") 
-
+    
+    if fileTags is None:
+        print("all tags is empty")
+        return
+    
     for key in fileTags.keys():
         if key.upper() not in tagList:
             print ("not matching:", key.upper())
