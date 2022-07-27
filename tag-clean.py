@@ -3,8 +3,10 @@ import os
 import mutagen
 
 #Thanks to https://pastebin.com/Ysb25hQh
-tagList = ["ARTIST", "TITLE", "ALBUM", "DATE", "TRACKNUMBER", 
-            "GENRE", "DISCNUMBER", "DISCTOTAL", "TRACKTOTAL"]
+tagList = [
+    "ARTIST", "TITLE", "ALBUM", "DATE", "TRACKNUMBER", 
+    "GENRE", "DISCNUMBER", "DISCTOTAL", "TRACKTOTAL",
+]
 argv = sys.argv[1:]
 
 def removeMeta(fileName):
