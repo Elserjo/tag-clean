@@ -11,11 +11,6 @@ def removeMeta(fileName):
     meta = mutagen.File(fileName)
     fileTags = meta.tags
     toClean = False #Do we need to clean?
-    fileBaseName = os.path.basename(fileName)
-
-    print ("processing file:",
-    num,
-    "[", fileBaseName,"]") 
     
     if fileTags is None:
         print("all tags is empty")
@@ -40,5 +35,14 @@ def removeMeta(fileName):
     meta.save() 
 
 for num, fileName in enumerate (argv, start=1):   
-    removeMeta(fileName)
+    fileBaseName = os.path.basename(fileName)
+    fileExtension = os.path.splitext(fileBaseName)[1]
+   
+    print ("processing file:",
+    num,
+    "[", fileBaseName,"]") 
 
+    if fileExtension == ".m4a":
+        print ("can not handle m4a extension")
+        continue
+    removeMeta(fileName)
