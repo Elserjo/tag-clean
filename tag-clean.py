@@ -38,11 +38,12 @@ for num, fileName in enumerate (argv, start=1):
     fileBaseName = os.path.basename(fileName)
     fileExtension = os.path.splitext(fileBaseName)[1]
    
-    print ("processing file:",
-    num,
-    "[", fileBaseName,"]") 
+    print ("processing file: {} [ {} ]"
+            .format(num, fileBaseName))
 
-    if fileExtension == ".m4a":
-        print ("can not handle m4a extension")
+    if (fileExtension == ".m4a" or 
+        fileExtension == ".mp3"):
+        print ("can not handle {} extension"
+                 .format(fileExtension))
         continue
     removeMeta(fileName)
