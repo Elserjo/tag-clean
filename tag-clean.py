@@ -1,6 +1,7 @@
 import sys
 import os
 import mutagen
+from mutagen import MutagenError
 
 #Thanks to https://pastebin.com/Ysb25hQh
 tagList = [
@@ -11,8 +12,15 @@ tagList = [
 argv = sys.argv[1:]
 
 def removeMeta(fileName):
-    meta = mutagen.File(fileName)
-    fileTags = meta.tags
+    try:
+        meta = mutagen.File(fileName)
+    except MutagenError:
+        print ("error while opening: {}"
+                .format(fileName))
+        return
+    else:
+        fileTags = meta.tags
+
     toClean = False #Do we need to clean?
     
     if fileTags is None:
