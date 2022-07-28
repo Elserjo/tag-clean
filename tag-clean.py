@@ -6,6 +6,7 @@ import mutagen
 tagList = [
     "ARTIST", "TITLE", "ALBUM", "DATE", "TRACKNUMBER", 
     "GENRE", "DISCNUMBER", "DISCTOTAL", "TRACKTOTAL",
+    "COMPILATION",
 ]
 argv = sys.argv[1:]
 
