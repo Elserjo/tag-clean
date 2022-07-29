@@ -14,15 +14,14 @@ argv = sys.argv[1:]
 def removeMeta(fileName):
     try:
         meta = mutagen.File(fileName)
-    except MutagenError:
-        print ("error while opening: {}"
-                .format(fileName))
-        return
-    else:
         fileTags = meta.tags
+    except (MutagenError, AttributeError) as err:
+        print ("error while opening: {}\n"
+                "error code: {}"
+                .format(fileName, err))
+        return
 
     toClean = False #Do we need to clean?
-    
     if fileTags is None:
         print("all tags is empty")
         return
